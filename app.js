@@ -1,10 +1,16 @@
 const express = require('express')
 const connect = require('./db/db');
+const movieRouter = require('./router/movie');
+const directorRouter = require('./router/director');
 const app = express()
 require('dotenv').config()
 
+// json tipi için middleware
+app.use(express.json());
+
 // Routermiddle ware
-//app.use() 
+app.use('/api',movieRouter) ;
+app.use('/api',directorRouter);
 
 
 
