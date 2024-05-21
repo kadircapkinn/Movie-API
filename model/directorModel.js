@@ -4,9 +4,14 @@ const DirectorSchema = mongoose.Schema({
     name:{
         type:String,
         required:[true,"isim girmen gerekiyor."],
-        trim:true,
-        maxlength:[30,"Film ismi 30 karekterden buyuk olamaza"]
+        trim:true
+    },
+    surname:String,
+    bio:String,
+    createdAt:{
+        type:Date,
+        default:Date.now
     }
 })
 
-module.exports = mongoose.model('Movie',DirectorSchema)
+module.exports = mongoose.model('directors',DirectorSchema)

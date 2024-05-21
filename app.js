@@ -12,9 +12,6 @@ app.use(express.json());
 app.use('/api',movieRouter) ;
 app.use('/api',directorRouter);
 
-
-
-
 const start = async() => {
     try{
         await connect(process.env.DB_PASSWORD)

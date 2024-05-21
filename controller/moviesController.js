@@ -2,7 +2,19 @@ const movieModel = require('../model/moviesModel');
 
 const getMoives = async (req,res)=>{
     try{
-        const movies = await movieModel.find({})
+        const movies = await movieModel.aggregate([
+            {
+                $lookup: {
+                    from: 'directors',
+                    localField: 'director_id',
+                    foreignField: '_id',
+                    as: 'director'
+                }
+            },
+            {
+                $unwind: '$director'
+            }
+        ]);
         res.status(200).json({movies})
     }catch(error){
         res.status(500).json({msg:"Filmler listelenmesi sirasinda hata olustu.",error})
@@ -63,7 +75,7 @@ const deleteMovie = async (req,res) => {
 
 const top10 = async (req,res) => {
     try{
-        const top10Movies = await movieModel.find({}).limit(10).sort({_imdb_score:-1});
+        const top10Movies = await movieModel.find({}).limit(10).sort({imdb_score:-1});
         res.status(200).json({top10Movies})
     } catch(error){
         res.status(500).json({error})

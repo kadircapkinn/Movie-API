@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const MovieSchema = mongoose.Schema({
-    director_id: mongoose.Schema.Types.ObjectId,
+    director_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Directors' // Director modeline referans veriyor
+    },
     title:{
         type:String,
         required:[true,"isim girmen gerekiyor."],
-
+        maxLength: 15,
+        minLength: 1
     },
     category:String,
     country:String,
@@ -17,4 +21,4 @@ const MovieSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Movie',MovieSchema)
+module.exports = mongoose.model('movies',MovieSchema)
