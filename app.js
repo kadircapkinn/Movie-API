@@ -2,6 +2,7 @@ const express = require('express')
 const connect = require('./db/db');
 const movieRouter = require('./router/movie');
 const directorRouter = require('./router/director');
+const userRouter = require('./router/user');
 const app = express()
 require('dotenv').config()
 
@@ -9,6 +10,7 @@ require('dotenv').config()
 app.use(express.json());
 
 // Routermiddle ware
+app.use(userRouter);
 app.use('/api',movieRouter) ;
 app.use('/api',directorRouter);
 
@@ -25,6 +27,3 @@ const start = async() => {
 }
 
 start()
-
-
-require('dotenv').config()
