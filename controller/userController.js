@@ -5,9 +5,7 @@ const jwt = require('jsonwebtoken');
 const userReg = async (req,res) => {
     const {username,password} = req.body;
     try{
-
         const hashedPassword = await bcrypt.hash(password,10) 
-
         const user = await userModel.create({
             username,
             password:hashedPassword
@@ -20,30 +18,6 @@ const userReg = async (req,res) => {
 }
 
 const userAuth = async (req,res) => {
-    /*
-    const {username,password} = req.body;
-    try{
-        const user = await userModel.findOne({username})
-        if(!user){
-            return res.status({msg:"Authentication basarisiz. Kullanici bulunamadi."})
-        }else{
-            const checkedPw = await bcrypt.compare(password,user.password) // true veya false dondurur.
-            if(!checkedPw){
-                return res.status(401).json({msg:"Authentication basarisiz. Yanlış parola."})
-            }else{
-                const payload = {
-                    username
-                }
-                const token = jwt.sign(payload,process.env.API_SECRET_KEY,{expiresIn:720});
-                return res.status(200).json({
-                    token
-                })
-            }
-        }
-    }catch(error){
-        console.log(error)
-        res.status(500).json({error})
-    }*/
     const { username, password } = req.body;
     try {
         const user = await userModel.findOne({ username });
