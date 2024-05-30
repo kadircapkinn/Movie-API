@@ -1,1 +1,1 @@
-NodeJS, RestAPI için uygulama örneği.
+NodeJS, Restful API uygulama örneği.
